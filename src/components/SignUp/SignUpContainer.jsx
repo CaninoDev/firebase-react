@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { FirebaseContext } from '../Firebase';
 
 import * as ROUTES from '../../constants/routes';
 
 import SignUpComponent from './SignUpComponent';
+import { withFirebase } from "../Firebase";
 
 const INITIAL_STATE = {
   username: '',
@@ -32,7 +33,8 @@ class SignUpContainer extends Component {
     firebase
        .doCreateUserWithEmailAndPassword(email, password)
        .then(authUser => {
-         this.setState({...INITIAL_STATE})
+         this.setState({...INITIAL_STATE});
+         this.props.history.push(ROUTES.HOME);
        })
        .catch(error => {
          this.setState = ({ error });
@@ -66,14 +68,7 @@ const SignUpLink = () => (
    </p>
 );
 
-const SignUp = () => (
-   <React.Fragment>
-     <h1>Sign Up</h1>
-     <FirebaseContext.Consumer>
-       {firebase => <SignUpContainer firebase={firebase} />}
-     </FirebaseContext.Consumer>
-   </React.Fragment>
-);
+const SignUp = withFirebase(SignUpContainer);
 
 export default SignUp;
 
