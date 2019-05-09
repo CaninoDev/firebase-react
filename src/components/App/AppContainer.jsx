@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
+import { AuthUserContext } from '../Session';
+
 
 import Navigation from '../Navigation';
 import Landing from '../Landing';
@@ -41,19 +43,21 @@ class App extends Component {
 
     render () {
         return (
-        <Router>
-            <Navigation authUser={this.state.authUser} />
+            <AuthUserContext.Provider value={this.state.authUser} >
+                <Router>
+                    <Navigation authUser={this.state.authUser} />
 
-            <hr />
+                    <hr />
 
-            <Route exact path={ROUTES.LANDING} component={Landing} />
-            <Route path={ROUTES.SIGN_UP} component={SignUp} />
-            <Route path={ROUTES.SIGN_IN} component={SignIn} />
-            <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
-            <Route path={ROUTES.ACCOUNT} component={Account} />
-            <Route path={ROUTES.ADMIN} component={Admin} />
-            <Route path={ROUTES.HOME} component={Home} />
-        </Router>
+                    <Route exact path={ROUTES.LANDING} component={Landing} />
+                    <Route path={ROUTES.SIGN_UP} component={SignUp} />
+                    <Route path={ROUTES.SIGN_IN} component={SignIn} />
+                    <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
+                    <Route path={ROUTES.ACCOUNT} component={Account} />
+                    <Route path={ROUTES.ADMIN} component={Admin} />
+                    <Route path={ROUTES.HOME} component={Home} />
+                </Router>
+            </AuthUserContext.Provider>
         )
     }
 };
