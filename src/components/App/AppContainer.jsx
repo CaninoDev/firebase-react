@@ -1,5 +1,7 @@
 import React from 'react';
 
+import * as ROUTES from '../../constants/routes';
+
 import {
     BrowserRouter as Router,
     Route,
