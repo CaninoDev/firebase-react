@@ -9,7 +9,7 @@ import {
 
 import Navigation from '../Navigation';
 import Landing from '../Landing';
-import SignUp from '../SignUp';
+import SignUpContainer from '../SignUp';
 import SignIn from '../SignIn';
 import PasswordForget from '../PasswordForget';
 import Home from '../Home';
@@ -23,7 +23,7 @@ const App = () => (
         <hr />
 
         <Route exact path={ROUTES.LANDING} component={Landing} />
-        <Route path={ROUTES.SIGN_UP} component={SignUp} />
+        <Route path={ROUTES.SIGN_UP} component={SignUpContainer} />
         <Route path={ROUTES.SIGN_IN} component={SignIn} />
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForget} />
         <Route path={ROUTES.ACCOUNT} component={Account} />
