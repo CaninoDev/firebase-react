@@ -24,11 +24,11 @@ class SignUpContainer extends Component {
   }
 
   onSubmit = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+
   };
 
   onChange = (event) => {
-
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
