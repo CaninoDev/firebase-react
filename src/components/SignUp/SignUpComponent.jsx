@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SignUpComponent = ({onSubmit, onChange, account}) => {
+const SignUpComponent = ({onSubmit, onChange, account, isInvalid}) => {
   const { username, email, password, passwordConfirm, error } = account;
   return (
      <form onSubmit={onSubmit}>
@@ -32,7 +32,7 @@ const SignUpComponent = ({onSubmit, onChange, account}) => {
           type="text"
           placeholder="Confirm Password..."
        />
-       <button type="submit">Sign Up</button>
+       <button disabled={isInvalid} type="submit">Sign Up</button>
 
        {error && <p>{error.message}</p>}
      </form>

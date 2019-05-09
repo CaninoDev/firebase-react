@@ -32,9 +32,15 @@ class SignUpContainer extends Component {
   };
 
   render() {
+    const { password, passwordConfirm, email, username } = this.state;
+    const isInvalid = password !== passwordConfirm ||
+       password === '' ||
+       email === '' ||
+       username === '';
+
     return (
        <React.Fragment>
-         <SignUpComponent onSubmit={this.onSubmit} onChange={this.onChange} account={this.state} />
+         <SignUpComponent isInvalid={isInvalid} onSubmit={this.onSubmit} onChange={this.onChange} account={this.state} />
        </React.Fragment>
     )
   }
