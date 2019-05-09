@@ -1,5 +1,5 @@
-import SignUpContainer from './SignUpContainer';
+import SignUp from './SignUpContainer';
 import { SignUpLink } from "./SignUpContainer";
 
-export default SignUpContainer;
+export default SignUp;
 export { SignUpLink }
