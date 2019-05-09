@@ -4,7 +4,8 @@ import { compose } from 'recompose';
 
 import SignInComponent from './SignInComponent';
 
-import { SignUpLink } from "../SignUp";
+import { SignUpLink } from '../SignUp';
+import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from "../Firebase";
 import * as ROUTES from '../../constants/routes';
 
@@ -51,6 +52,7 @@ class SignInContainer extends Component {
     return (
        <React.Fragment>
          <SignInComponent onChange={this.onChange} onSubmit={this.onSubmit} isInvalid={isInvalid} account={this.state} />
+         <PasswordForgetLink />
          <SignUpLink />
        </React.Fragment>
     )
