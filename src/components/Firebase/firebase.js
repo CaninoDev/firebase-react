@@ -27,7 +27,8 @@ class Firebase {
 	constructor() {
 		app.initializeApp(firebaseConfig);
 
-		this.auth = app.auth();
+    this.auth = app.auth();
+    this.db = app.database()
 	}
 
 	// AUTH API
@@ -41,7 +42,13 @@ class Firebase {
 
 	doPasswordReset = (email) => this.auth.doPasswordReset(email);
 
-	doPasswordUpdate = (password) => this.auth.doPasswordUpdate(password);
+  doPasswordUpdate = (password) => this.auth.doPasswordUpdate(password);
+  
+  // USER API
+  // The paths in ref correspond's to Firebase db structure
+  user = (uid) => this.db(`users/${uid}`);
+
+  users = () => this.db.ref(`users`);
 }
 
 export default Firebase;
