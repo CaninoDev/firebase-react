@@ -2,13 +2,17 @@ import React from 'react';
 
 import PasswordForget from '../PasswordForget';
 import PasswordChange from '../PasswordChange';
-import { withAuthorization } from '../Session';
+import { AuthUserContext, withAuthorization } from '../Session';
+
 
 
 const AccountContainer = () => (
-    <React.Fragment>
+    <AuthUserContext.Consumer>
+        <h1>Account: {authUser.email}</h1>
         <PasswordForget />
         <PasswordChange />
+    </AuthUserContext.Consumer>
+
     </React.Fragment>
 )
 
