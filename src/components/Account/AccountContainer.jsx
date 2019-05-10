@@ -2,6 +2,8 @@ import React from 'react';
 
 import PasswordForget from '../PasswordForget';
 import PasswordChange from '../PasswordChange';
+import { withAuthorization } from '../Session';
+
 
 const AccountContainer = () => (
     <React.Fragment>
@@ -10,6 +12,7 @@ const AccountContainer = () => (
     </React.Fragment>
 )
 
+const condition = (authUser) => !!authUser;
 const Account = AccountContainer;
 
-export default Account;
+export default withAuthorization(condition)(Account);
