@@ -8,12 +8,13 @@ import { AuthUserContext, withAuthorization } from '../Session';
 
 const AccountContainer = () => (
     <AuthUserContext.Consumer>
-        <h1>Account: {authUser.email}</h1>
-        <PasswordForget />
-        <PasswordChange />
+        {authUser => (
+            <React.Fragment>
+                <h1>Account: {authUser.email}</h1>
+                <PasswordForget />
+                <PasswordChange />
+            </React.Fragment>)}
     </AuthUserContext.Consumer>
-
-    </React.Fragment>
 )
 
 const condition = (authUser) => !!authUser;

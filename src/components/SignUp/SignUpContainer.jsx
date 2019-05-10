@@ -32,9 +32,18 @@ class SignUpContainer extends Component {
     firebase
        .doCreateUserWithEmailAndPassword(email, password)
        .then(authUser => {
+         // Create the user in Firebase db
+         return firebase
+          .user(authUser.user.uid)
+          .set({
+            username,
+            email,
+          });
+        })
+        .then(() => {
          this.setState({...INITIAL_STATE});
          this.props.history.push(ROUTES.HOME);
-       })
+        })
        .catch(error => {
          this.setState = ({ error });
        });
