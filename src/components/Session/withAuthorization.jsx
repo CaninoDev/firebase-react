@@ -6,12 +6,16 @@ import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 
-/* The firebase listener, onAuthStateChanged, triggers a callback function everytime the
+/* The firebase listener, onAuthStateChanged, triggers a callback function every time the
 authenticated user changes. authUser is either an object or null; within the function, the
 passed condition() function is executed with the authUser. If authorization fails
 (authUser is null), the user is redirected to the signin page. 
-If it doesn't the the higher order component does nothing. */
-
+If it doesn't, the the higher order component does nothing. 
+While Firebase has internal functions for manipulating the authentication table, however, 
+it would further lock this app in with using Firebase. Should we decide to decouple from 
+Firebase and migrate to another database, it is prudent to merge the authentication table
+with Firebase's database.
+*/
 const withAuthorization = (condition) => (Component) => {
     class WithAuthorization extends React.Component {
         componentDidMount() {
@@ -19,8 +23,30 @@ const withAuthorization = (condition) => (Component) => {
 
             this.listener = firebase.auth.onAuthStateChanged(
                 authUser => {
-                    if (!condition(authUser)) {
-                        history.push(ROUTES.SIGN_IN)
+                    if (authUser) {
+                        firebase
+                        .user(authUser.uid)
+                        .once('value')
+                        .then((snapshot) => {
+                            const dbUser = snapshot.val();
+
+                            // default to null ROLES
+                            if (!dbUser.roles) {
+                                dbUser.roles = {};
+                            }
+
+                            // merge auth and dbuser
+                            authUser = {
+                                uid: authUser.uid,
+                                email: authUser.email,
+                                ...dbUser
+                            };
+                            if (!condition(authUser)) {
+                                history.push(ROUTES.SIGN_IN)
+                        }
+                        });
+                    } else {
+                        history.push(ROUTES.SIGN_IN);
                     }
                 }
             )
