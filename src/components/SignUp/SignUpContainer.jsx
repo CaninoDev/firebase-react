@@ -3,6 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import { compose } from 'recompose';
 
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 
 import SignUpComponent from './SignUpComponent';
 import { withFirebase } from "../Firebase";
@@ -12,6 +13,7 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   passwordConfirm: '',
+  isAdmin: false,
   error: null,
 };
 
@@ -23,11 +25,13 @@ class SignUpContainer extends Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.onChangeCheckbox = this.onChangeCheckbox.bind(this);
   }
 
   onSubmit = (event) => {
     const { username, email, password } = this.state;
     const { firebase } = this.props;
+    const roles = {};
 
     firebase
        .doCreateUserWithEmailAndPassword(email, password)
@@ -55,8 +59,12 @@ class SignUpContainer extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  onChangeCheckbox = (event) => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
   render() {
-    const { password, passwordConfirm, email, username } = this.state;
+    const { password, passwordConfirm, email, username, isAdmin } = this.state;
     const isInvalid = password !== passwordConfirm ||
        password === '' ||
        email === '' ||
@@ -64,7 +72,14 @@ class SignUpContainer extends Component {
 
     return (
        <React.Fragment>
-         <SignUpComponent isInvalid={isInvalid} onSubmit={this.onSubmit} onChange={this.onChange} account={this.state} />
+         <SignUpComponent 
+          isInvalid={isInvalid}
+          isAdmin={isAdmin}
+          onSubmit={this.onSubmit} 
+          onChange={this.onChange} 
+          onChangeCheckbox={this.onChangeCheckbox} 
+          account={this.state} 
+         />
        </React.Fragment>
     )
   }
