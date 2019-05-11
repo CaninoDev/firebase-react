@@ -16,31 +16,12 @@ const withAuthentication = (Component) => {
         componentDidMount () {
             const { firebase } = this.props;
 
-            this.listener = firebase.auth.onAuthStateChanged(
-                authUser => {
-                    if (authUser) {
-                        firebase
-                        .user(authUser.uid)
-                        .once('value')
-                        .then((snapshot) => {
-                            const dbUser = snapshot.val();
-
-                            // default to null ROLES
-                            if (!dbUser.roles) {
-                                dbUser.roles = {};
-                            }
-
-                            // merge auth and dbuser
-                            authUser = {
-                                uid: authUser.uid,
-                                email: authUser.email,
-                                ...dbUser
-                            };
-                            this.setState({ authUser })
-                        });
-                    } else {
-                        this.setState({ authUser: null });
-                    }
+            this.listener = firebase.onAuthUserListener(
+                (authUser) => {
+                    this.setState({ authUser })
+                },
+                () => {
+                   this.setState({ authUser: null });
                 }
             );
         }
