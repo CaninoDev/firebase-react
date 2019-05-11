@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import { tsThisType } from '@babel/types';
 
 
 // const config = {
@@ -49,6 +50,34 @@ class Firebase {
   user = (uid) => this.db(`users/${uid}`);
 
   users = () => this.db.ref(`users`);
+
+  // Merge Auth and DB API
+  onAuthUserListener = (next, fallback) => {
+    this.auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.user(authUser.uid)
+          .once('value')
+          .then((snapshot) => {
+              const dbUser = snapshot.val();
+
+              // default to null ROLES
+              if (!dbUser.roles) {
+                  dbUser.roles = {};
+              }
+
+              // merge auth and dbuser
+              authUser = {
+                  uid: authUser.uid,
+                  email: authUser.email,
+                  ...dbUser
+              };
+              next(authUser);
+          });
+        } else {
+          fallback();
+        }
+    });
+  };
 }
 
 export default Firebase;

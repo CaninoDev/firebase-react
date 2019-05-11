@@ -29,9 +29,14 @@ class SignUpContainer extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, password } = this.state;
+    const { username, email, password, isAdmin } = this.state;
     const { firebase } = this.props;
+    
     const roles = {};
+
+    if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
+    }
 
     firebase
        .doCreateUserWithEmailAndPassword(email, password)
@@ -42,6 +47,7 @@ class SignUpContainer extends Component {
           .set({
             username,
             email,
+            roles,
           });
         })
         .then(() => {
