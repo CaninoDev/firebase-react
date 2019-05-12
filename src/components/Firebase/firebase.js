@@ -47,7 +47,7 @@ class Firebase {
   
   // USER API
   // The paths in ref correspond's to Firebase db structure
-  user = (uid) => this.db(`users/${uid}`);
+  user = (uid) => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref(`users`);
 

@@ -27,7 +27,7 @@ const withAuthentication = (Component) => {
         }
 
         componentWillUnmout () {
-            this.lister();
+            this.listener();
         }
 
         render() {
