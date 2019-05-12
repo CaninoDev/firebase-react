@@ -1,13 +1,19 @@
 import React from 'react';
 
-const SignUpComponent = ({onSubmit, onChange, onChangeCheckbox, account, isInvalid, isAdmin}) => {
+const SignUpComponent = ({onSubmit, onChange, onChangeCheckbox, account, isInvalid, isPatient, isPhysician}) => {
   const { username, email, password, passwordConfirm, error } = account;
   return (
      <form onSubmit={onSubmit}>
        <input
-          name="isAdmin"
+          name="isPatient"
           type="checkbox"
-          checked={isAdmin}
+          checked={isPatient}
+          onChange={onChangeCheckbox}
+       />
+              <input
+          name="isPhysician"
+          type="checkbox"
+          checked={isPhysician}
           onChange={onChangeCheckbox}
        />
        <input

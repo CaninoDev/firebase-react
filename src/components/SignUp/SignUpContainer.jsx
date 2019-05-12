@@ -13,7 +13,8 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   passwordConfirm: '',
-  isAdmin: false,
+  isPatient: true,
+  isPhysician: false, // Placeholder
   error: null,
 };
 
@@ -29,14 +30,16 @@ class SignUpContainer extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, password, isAdmin } = this.state;
+    const { username, email, password, isPatient, isPhysician } = this.state;
     const { firebase } = this.props;
     
     const roles = {};
 
-    if (isAdmin) {
-      roles[ROLES.ADMIN] = ROLES.ADMIN;
-    }
+    if (isPatient) {
+      roles[ROLES.PATIENT] = ROLES.PATIENT;
+    } else if (isPhysician) {
+      roles[ROLES.PHYSICIAN] = ROLES.PHYSICIAN
+    };
 
     firebase
        .doCreateUserWithEmailAndPassword(email, password)
