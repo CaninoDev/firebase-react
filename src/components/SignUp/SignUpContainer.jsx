@@ -15,6 +15,7 @@ const INITIAL_STATE = {
   passwordConfirm: '',
   isPatient: true,
   isPhysician: false, // Placeholder
+  isAdmin: false, // Placeholder
   error: null,
 };
 
@@ -30,7 +31,7 @@ class SignUpContainer extends Component {
   }
 
   onSubmit = (event) => {
-    const { username, email, password, isPatient, isPhysician } = this.state;
+    const { username, email, password, isPatient, isPhysician, isAdmin } = this.state;
     const { firebase } = this.props;
     
     const roles = {};
@@ -38,7 +39,9 @@ class SignUpContainer extends Component {
     if (isPatient) {
       roles[ROLES.PATIENT] = ROLES.PATIENT;
     } else if (isPhysician) {
-      roles[ROLES.PHYSICIAN] = ROLES.PHYSICIAN
+      roles[ROLES.PHYSICIAN] = ROLES.PHYSICIAN;
+    } else if (isAdmin) {
+      roles[ROLES.ADMIN] = ROLES.ADMIN;
     };
 
     firebase
@@ -73,7 +76,7 @@ class SignUpContainer extends Component {
   };
 
   render() {
-    const { password, passwordConfirm, email, username, isAdmin } = this.state;
+    const { password, passwordConfirm, email, username, isAdmin, isPhysician, isPatient } = this.state;
     const isInvalid = password !== passwordConfirm ||
        password === '' ||
        email === '' ||
@@ -84,6 +87,8 @@ class SignUpContainer extends Component {
          <SignUpComponent 
           isInvalid={isInvalid}
           isAdmin={isAdmin}
+          isPhysician={isPhysician}
+          isPatient={isPatient}
           onSubmit={this.onSubmit} 
           onChange={this.onChange} 
           onChangeCheckbox={this.onChangeCheckbox} 

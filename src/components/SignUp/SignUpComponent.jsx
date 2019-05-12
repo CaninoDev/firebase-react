@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SignUpComponent = ({onSubmit, onChange, onChangeCheckbox, account, isInvalid, isPatient, isPhysician}) => {
+const SignUpComponent = ({onSubmit, onChange, onChangeCheckbox, account, isInvalid, isPatient, isPhysician, isAdmin}) => {
   const { username, email, password, passwordConfirm, error } = account;
   return (
      <form onSubmit={onSubmit}>
@@ -10,10 +10,16 @@ const SignUpComponent = ({onSubmit, onChange, onChangeCheckbox, account, isInval
           checked={isPatient}
           onChange={onChangeCheckbox}
        />
-              <input
+       <input
           name="isPhysician"
           type="checkbox"
           checked={isPhysician}
+          onChange={onChangeCheckbox}
+       />
+       <input
+          name="isAdmin"
+          type="checkbox"
+          checked={isAdmin}
           onChange={onChangeCheckbox}
        />
        <input
