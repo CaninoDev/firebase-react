@@ -3,6 +3,9 @@ import React from 'react';
 import AuthUserContext from './context';
 import { withFirebase } from '../Firebase';
 
+
+/* withAuthentication Higher Order Component concerns itself with local state */
+
 const withAuthentication = (Component) => {
     class WithAuthentication extends React.Component {
         constructor(props) {
