@@ -31,7 +31,7 @@ Currently the configuration information for connecting with Firebase is containe
 
 ## TODO
 The following are tasks that must be completed before we can get back up to basic MVP:
-- Debug `this.listener` is not a function. For some reason, this.listener is not being registered.
+- Debug `this.listener is not a function`. For some reason, this.listener is not being registered.
 (The following are basic)
 - Implement `cases` component
 - Implement `body` component
