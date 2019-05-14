@@ -1,68 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Docapp Skeletal Code
 
-## Available Scripts
+When the team first got this assignment, we were given a template that was both difficult to parse and to maintain. Component styling was mixed in with component logic. The structure of the application was not intuitive. The end product was a (well) patched together frankenstein of template code and customized code for our client. This repository aims to provide a stripped down, well defined, domain separated by file, framework from which to work from.
 
-In the project directory, you can run:
+## Basic Structure
 
-### `npm start`
+Most of the code resides in `src/components` and represent distinct domains. Within each of the component directories will be three files: `index.js`, `<componentName>Container.jsx` and `<componentName>Component.jsx`. The only exceptions to this rule, thus far, are `src/components/Navigation`, `src/components/Firebase` and `src/components/Session`.
+`index.js` is self descriptive. It will export the component *en toto*. The component's name will be same as the directory in which it is contained in.
+`<componentName>Container.jsx` will contain the component's logic and lifecycle functions. It is in this file where imports of packages are made, higher order components are applied, and event logic functions defined. The format for each of the `<componentName>Container.jsx` will be in a similar format. 
+`<componentName>Component.jsx` are exclusively functional components. Typically they will have only one `import` statement and any css import. The code therein are strictly for displaying data in a particular style and manner. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+As for other directories, `src/components/Firebase` and `src/components/Session` will house backend connection as well as application wide context and session management. The functions therein will be explained in the next section.
+`src/components/Navigation` contains only an `index.js` as their are no view component. Only routing information.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+And finally, there is `constants/routes` and `constants/roles`. These files server as the 'single source of truth' as it comes to routing and roles respectively.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Higher Order Components and Application Wide Domain functions
 
-### `npm run build`
+There are a number of higher order components one should be aware of: `withAuthorization` and `withAuthentication`. The application wide domain function is `withFirebase`.
+`withAuthorization` will wrap a component and concern itself with local state session management. It contains the logic whereby the application is made aware whether the end user is logged in. If not, any attempts to access unauthorized pages will automatically be redirected to the SignIn page.
+`withAuthentication` will wrap a component and provide for user session management.
+`withFirebase` will wrap a component and provide functions to interact with the firebase backend. Such functions include signing in, signing up, retrieving data, posting data, *et al*.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Concerns
+Currently the configuration information for connecting with Firebase is contained within `src/components/Firebase/firebase.js`. This will eventually need to be moved to a more secure locations during production.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## TODO
+The following are tasks that must be completed before we can get back up to basic MVP:
+- Debug `this.listener` is not a function. For some reason, this.listener is not being registered.
+(The following are basic)
+- Implement `cases` component
+- Implement `body` component
+- Implement `progress` component
+- Implement `upload file` component
+- Implement `add information` component
+- And finally, implement a application wide and component specific styling.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Running the tests
 
-### `npm run eject`
+(Learning how to implement tests.. Placeholder)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Break down into end to end tests
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+(Placeholder)
+### And coding style tests
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+(Placholder)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Deployment
 
-## Learn More
+(Placeholder)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
