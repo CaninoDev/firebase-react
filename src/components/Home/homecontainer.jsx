@@ -2,7 +2,7 @@ import React from 'react';
 
 import { withAuthorization } from '../Session';
 
-const Home = () => (
+const HomeContainer = () => (
 	<div>
 		<h1>Home Page</h1>
 	</div>
@@ -14,5 +14,6 @@ TODO: Make it finegrained to distinguish admin from patient
  */
 
 const condition = (authUser) => !!authUser;
+const Home = withAuthorization(condition)(HomeContainer);
 
-export default withAuthorization(condition)(Home)
+export default Home;

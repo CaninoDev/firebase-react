@@ -10,12 +10,13 @@ import * as ROLES from '../../constants/roles';
 const Navigation = () => (
     <AuthUserContext.Consumer>
         {authUser => 
-            authUser ? <NavigationAuth authUser={authUser} /> : <NavigationNonAuth />}
+            authUser 
+            ? (<NavigationAuth authUser={authUser} />) 
+            : (<NavigationNonAuth /> )}
     </AuthUserContext.Consumer>
 );
 
 const NavigationAuth = ({ authUser }) => (
-    <div>
         <ul>
             <li>
                 <Link to={ROUTES.HOME}>Home</Link>
@@ -31,7 +32,6 @@ const NavigationAuth = ({ authUser }) => (
                 <SignOutButton />
             </li>
         </ul>
-    </div>
 );
 
 const NavigationNonAuth = () => (

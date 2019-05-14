@@ -21,6 +21,7 @@ class SignInContainer extends Component {
 
     this.state = { ...INITIAL_STATE };
     this.onSubmit = this.onSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
 
   }
 
@@ -46,7 +47,7 @@ class SignInContainer extends Component {
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, error } = this.state;
     const isInvalid = password === '' || email === '';
 
     return (
@@ -54,6 +55,7 @@ class SignInContainer extends Component {
          <SignInComponent onChange={this.onChange} onSubmit={this.onSubmit} isInvalid={isInvalid} account={this.state} />
          <PasswordForgetLink />
          <SignUpLink />
+         {error && <p>{error.message}</p>}
        </React.Fragment>
     )
   }

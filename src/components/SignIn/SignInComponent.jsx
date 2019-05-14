@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SignInComponent = ({onSubmit, onChange, account, isInvalid}) => {
-  const { email, password, error } = account;
+  const { email, password } = account;
 
   return (
      <form onSubmit={onSubmit}>
@@ -20,8 +20,6 @@ const SignInComponent = ({onSubmit, onChange, account, isInvalid}) => {
           placeholder="Password"
        />
        <button disabled={isInvalid} type="submit">Sign In</button>
-
-       {error && <p>{error.message}</p>}
      </form>
   )
 };

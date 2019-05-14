@@ -9,15 +9,15 @@ import { AuthUserContext, withAuthorization } from '../Session';
 const AccountContainer = () => (
     <AuthUserContext.Consumer>
         {authUser => (
-            <React.Fragment>
+            <div>
                 <h1>Account: {authUser.email}</h1>
                 <PasswordForget />
                 <PasswordChange />
-            </React.Fragment>)}
+            </div>)}
     </AuthUserContext.Consumer>
 )
 
 const condition = (authUser) => !!authUser;
-const Account = AccountContainer;
+const Account = withAuthorization(condition)(AccountContainer);
 
-export default withAuthorization(condition)(Account);
+export default Account;

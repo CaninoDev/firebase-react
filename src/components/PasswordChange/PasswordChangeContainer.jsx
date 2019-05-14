@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 import { withFirebase } from "../Firebase";
-import * as ROUTES from '../../constants/routes';
 
 import PasswordChangeComponent from './PasswordChangeComponent';
 
@@ -31,7 +29,7 @@ class PasswordChangeContainer extends Component {
     const { firebase } = this.props;
 
     firebase
-       .doPasswordReset(password)
+       .doPasswordUpdate(password)
        .then(() => {
          this.setState({...INITIAL_STATE});
        })

@@ -29,27 +29,21 @@ class Firebase {
 		app.initializeApp(firebaseConfig);
 
     this.auth = app.auth();
-    this.db = app.database()
+    this.db = app.database();
 	}
 
 	// AUTH API
   doCreateUserWithEmailAndPassword = (email, password) =>
-     this.auth.createUserWithEmailAndPassword(email, password);
+    this.auth.createUserWithEmailAndPassword(email, password);
 
-	doSignInWithEmailAndPassword = (email, password) =>
-     this.auth.doSignInWithEmailAndPassword(email, password);
+  doSignInWithEmailAndPassword = (email, password) =>
+    this.auth.doSignInWithEmailAndPassword(email, password);
 
 	doSignOut = () => this.auth.signOut();
 
 	doPasswordReset = (email) => this.auth.doPasswordReset(email);
 
   doPasswordUpdate = (password) => this.auth.doPasswordUpdate(password);
-  
-  // USER API
-  // The paths in ref correspond's to Firebase db structure
-  user = (uid) => this.db.ref(`users/${uid}`);
-
-  users = () => this.db.ref(`users`);
 
   // Merge Auth and DB API
   onAuthUserListener = (next, fallback) => {
@@ -62,10 +56,10 @@ class Firebase {
 
               // default to null ROLES
               if (!dbUser.roles) {
-                  dbUser.roles = {};
+                  dbUser.roles = [];
               }
 
-              // merge auth and dbuser
+              // merge authUser and dbuser
               authUser = {
                   uid: authUser.uid,
                   email: authUser.email,
@@ -78,6 +72,12 @@ class Firebase {
         }
     });
   };
+
+  // USER API
+  // The paths in ref correspond's to Firebase db structure
+  user = (uid) => this.db.ref(`users/${uid}`);
+
+  users = () => this.db.ref(`users`);
 }
 
 export default Firebase;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PasswordForgetComponent = ({onSubmit, onChange, account, isInvalid}) => {
-  const { email, password, error } = account;
+  const { email, error } = account;
 
   return (
      <form onSubmit={onSubmit}>
