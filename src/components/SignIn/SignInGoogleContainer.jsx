@@ -30,7 +30,7 @@ class SignInGoogleContainer extends Component {
                     .set({
                         username: authUser.user.displayName,
                         email: authUser.user.email,
-                        role: { PATIENT: 'PATIENT' },
+                        roles: { PATIENT: 'PATIENT' },
                     },
                     { merge: true }
                     );
