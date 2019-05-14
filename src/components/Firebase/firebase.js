@@ -1,6 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
-import 'firebase/database';
+import 'firebase/firestore';
 
 var firebaseConfig = {
     apiKey: "AIzaSyCGSqInDORUqHEb_o69DKSU2JwtHR1Gt4A",
@@ -29,8 +29,9 @@ class Firebase {
 		app.initializeApp(firebaseConfig);
 
     this.auth = app.auth();
-    this.db = app.database();
+    this.db = app.firestore();
     this.googleProvider = new app.auth.GoogleAuthProvider();
+
 	}
 
 	// AUTH API
@@ -38,8 +39,7 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password);
 
   doSignInWithEmailAndPassword = (email, password) =>
-    this.auth.doSignInWithEmailAndPassword(email, password);
-
+    this.auth.signInWithEmailAndPassword(email, password).catch((error) => console.log(error.message));
   doSignInWithGoogle = () =>
       this.auth.signInWithPopup(this.googleProvider);
 
@@ -54,13 +54,13 @@ class Firebase {
     this.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         this.user(authUser.uid)
-          .once('value')
+          .get()
           .then((snapshot) => {
-              const dbUser = snapshot.val();
+              const dbUser = snapshot.data();
 
               // default to null ROLES
               if (!dbUser.roles) {
-                  dbUser.roles = [];
+                  dbUser.roles = {};
               }
 
               // merge authUser and dbuser
@@ -79,9 +79,9 @@ class Firebase {
 
   // USER API
   // The paths in ref correspond's to Firebase db structure
-  user = (uid) => this.db.ref(`users/${uid}`);
+  user = (uid) => this.db.doc(`users/${uid}`);
 
-  users = () => this.db.ref(`users`);
+  users = () => this.db.collection('users');
 }
 
 export default Firebase;

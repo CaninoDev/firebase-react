@@ -19,21 +19,24 @@ class AdminContainer extends Component {
 
         this.setState({ loading: true });
 
-        firebase
+        this.unsubscribe = firebase
             .users()
-            .on('value', (snapshot) => {
-                const userObject = snapshot.val();
+            .onSnapshot((snapshot) => {
+                let users = [];
 
-                const usersRoster = Object.keys(userObject).map((key) => ({
-                    ...userObject[key],
-                    uid: key,
-                }));
+                snapshot.forEach(doc =>
+                    users.push({ ...doc.data(), uid: doc.id })
+                );
 
                 this.setState({
-                    users: usersRoster,
-                    loading: false,
+                    users,
+                    loading: false
                 });
             });
+    }
+
+    componentWillUnmount() {
+        this.unsubscribe();
     }
 
     render() {
