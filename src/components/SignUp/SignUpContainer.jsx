@@ -54,14 +54,16 @@ class SignUpContainer extends Component {
             username,
             email,
             roles,
-          });
+          },
+          { merge: true }
+          );
         })
         .then(() => {
          this.setState({...INITIAL_STATE});
          this.props.history.push(ROUTES.HOME);
         })
        .catch(error => {
-         this.setState = ({ error });
+         this.setState = ({ error: error });
        });
 
     event.preventDefault();

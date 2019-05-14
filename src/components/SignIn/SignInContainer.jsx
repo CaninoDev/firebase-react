@@ -37,7 +37,7 @@ class SignInContainer extends Component {
          history.push(ROUTES.HOME);
        })
        .catch((error) => {
-         this.setState = ({ error });
+         this.setState = ({ error: error });
        });
 
     event.preventDefault();

@@ -34,7 +34,7 @@ class PasswordChangeContainer extends Component {
          this.setState({...INITIAL_STATE});
        })
        .catch(error => {
-         this.setState = ({ error });
+         this.setState = ({ error: error });
        });
 
     event.preventDefault();

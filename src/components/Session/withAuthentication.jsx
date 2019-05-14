@@ -16,7 +16,7 @@ const withAuthentication = (Component) => {
             };        
         }
 
-        componentDidMount () {
+        componentWillMount() {
             const { firebase } = this.props;
 
             this.listener = firebase.onAuthUserListener(
@@ -31,7 +31,7 @@ const withAuthentication = (Component) => {
             );
         }
 
-        componentWillUnmout () {
+        componentWillUnmount() {
             this.listener();
         }
 

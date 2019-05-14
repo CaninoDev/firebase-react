@@ -37,7 +37,7 @@ class PasswordForgetContainer extends Component {
          history.push(ROUTES.HOME);
        })
        .catch(error => {
-         this.setState = ({ error });
+         this.setState = ({ error: error });
        });
 
     event.preventDefault();
@@ -59,7 +59,7 @@ const PasswordForgetLink = () => (
     <p>
         <Link to={ROUTES.PASSWORD_FORGET}>Forgot Password?</Link>
     </p>
-)
+);
 
 const PasswordForget = withFirebase(PasswordForgetContainer);
 

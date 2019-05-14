@@ -55,6 +55,6 @@ const SignUpComponent = ({onSubmit, onChange, onChangeCheckbox, account, isInval
        {error && <p>{error.message}</p>}
      </form>
   );
-}
+};
 
 export default SignUpComponent;

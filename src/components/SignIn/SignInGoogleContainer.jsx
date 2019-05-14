@@ -31,7 +31,9 @@ class SignInGoogleContainer extends Component {
                         username: authUser.user.displayName,
                         email: authUser.user.email,
                         role: { PATIENT: 'PATIENT' },
-                    });
+                    },
+                    { merge: true }
+                    );
                 })
             .then(() => {
                 this.setState({ error: null });

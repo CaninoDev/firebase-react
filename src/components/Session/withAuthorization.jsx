@@ -11,7 +11,7 @@ import * as ROUTES from '../../constants/routes';
 const withAuthorization = (condition) => (Component) => {
     class WithAuthorization extends React.Component {
 
-        componentDidMount() {
+        componentWillMount() {
 
             const { firebase, history } = this.props;
 
