@@ -4,13 +4,13 @@ When the team first got this assignment, we were given a template that was both 
 
 ## Basic Structure
 
-Most of the code resides in `src/components` and represent distinct domains. Within each of the component directories will be three files: `index.js`, `<componentName>Container.jsx` and `<componentName>Component.jsx`. The only exceptions to this rule, thus far, are `src/components/Navigation`, `src/components/Firebase` and `src/components/Session`.
-`index.js` is self descriptive. It will export the component *en toto*. The component's name will be same as the directory in which it is contained in.
-`<componentName>Container.jsx` will contain the component's logic and lifecycle functions. It is in this file where imports of packages are made, higher order components are applied, and event logic functions defined. The format for each of the `<componentName>Container.jsx` will be in a similar format. 
-`<componentName>Component.jsx` are exclusively functional components. Typically they will have only one `import` statement and any css import. The code therein are strictly for displaying data in a particular style and manner. 
+<p>Most of the code resides in `src/components` and represent distinct domains. Within each of the component directories will be three files: `index.js`, `<componentName>Container.jsx` and `<componentName>Component.jsx`. The only exceptions to this rule, thus far, are `src/components/Navigation`, `src/components/Firebase` and `src/components/Session`.</p>
+<p>`index.js` is self descriptive. It will export the component *en toto*. The component's name will be same as the directory in which it is contained in.</p>
+<p>`<componentName>Container.jsx` will contain the component's logic and lifecycle functions. It is in this file where imports of packages are made, higher order components are applied, and event logic functions defined. The format for each of the `<componentName>Container.jsx` will be in a similar format.</p>
+<p>`<componentName>Component.jsx` are exclusively functional components. Typically they will have only one `import` statement and any css import. The code therein are strictly for displaying data in a particular style and manner.</p>
 
-As for other directories, `src/components/Firebase` and `src/components/Session` will house backend connection as well as application wide context and session management. The functions therein will be explained in the next section.
-`src/components/Navigation` contains only an `index.js` as their are no view component. Only routing information.
+<p>As for other directories, `src/components/Firebase` and `src/components/Session` will house backend connection as well as application wide context and session management. The functions therein will be explained in the next section.</p>
+<p>`src/components/Navigation` contains only an `index.js` as their are no view component. Only routing information.</p>
 
 And finally, there is `constants/routes` and `constants/roles`. These files server as the 'single source of truth' as it comes to routing and roles respectively.
 
