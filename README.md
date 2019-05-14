@@ -38,7 +38,7 @@ The following are tasks that must be completed before we can get back up to basi
 - Implement `progress` component
 - Implement `upload file` component
 - Implement `add information` component
-- And finally, implement a application wide and component specific styling.
+- And finally, implement an application wide and component specific styling.
 
 ## Running the tests
 
