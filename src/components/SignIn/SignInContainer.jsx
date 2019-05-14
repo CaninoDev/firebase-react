@@ -8,6 +8,7 @@ import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink } from '../PasswordForget';
 import { withFirebase } from "../Firebase";
 import * as ROUTES from '../../constants/routes';
+import SignInGoogle from './SignInGoogleContainer';
 
 const INITIAL_STATE = {
   email: '',
@@ -25,25 +26,25 @@ class SignInContainer extends Component {
 
   }
 
-  onChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   onSubmit = (event) => {
     const { email, password } = this.state;
     const { firebase, history } = this.props;
 
     firebase
-       .doSignInWithEmailAndPassword(email, password)
-       .then(() => {
+      .doSignInWithEmailAndPassword(email, password)
+      .then(() => {
          this.setState({...INITIAL_STATE});
          history.push(ROUTES.HOME);
        })
-       .catch(error => {
+       .catch((error) => {
          this.setState = ({ error });
        });
 
     event.preventDefault();
+  };
+
+  onChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -53,6 +54,7 @@ class SignInContainer extends Component {
     return (
        <React.Fragment>
          <SignInComponent onChange={this.onChange} onSubmit={this.onSubmit} isInvalid={isInvalid} account={this.state} />
+         <SignInGoogle />
          <PasswordForgetLink />
          <SignUpLink />
          {error && <p>{error.message}</p>}
