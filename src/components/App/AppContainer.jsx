@@ -20,7 +20,7 @@ import Home from '../Home';
 import Account from '../Account';
 import Admin from '../Admin';
 
-class App extends Component {
+class AppContainer extends Component {
     render () {
         return (
             <Router>
@@ -36,6 +36,7 @@ class App extends Component {
             </Router>
         )
     }
-};
+}
 
-export default withAuthentication(App);
+const App = withAuthentication(AppContainer);
+export default App;
