@@ -1,6 +1,6 @@
-# Docapp Skeletal Code
+# React with Firebase Foundation
 
-When the team first got this assignment, we were given a template that was both difficult to parse and to maintain. Component styling was mixed in with component logic. The structure of the application was not intuitive. The end product was a (well) patched together frankenstein of template code and customized code for our client. This repository aims to provide a stripped down, well defined, domain separated by file, framework from which to work from.
+This is an attempt to produce a foundation for developing React applications with React.
 
 ## Basic Structure
 
