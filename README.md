@@ -27,7 +27,7 @@ There are a number of higher order components one should be aware of: `withAutho
 `withFirebase` will wrap a component and provide functions to interact with the firebase backend. Such functions include signing in, signing up, retrieving data, posting data, *et al*.
 
 ### Concerns
-Currently the configuration information for connecting with Firebase is contained within `src/components/Firebase/firebase.js`. This will eventually need to be moved to a more secure locations during production.
+This hasn't been tested with penetration testing.
 
 ## TODO
 The following are tasks that must be completed before we can get back up to basic MVP:
