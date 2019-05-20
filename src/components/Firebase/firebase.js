@@ -3,13 +3,13 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 var firebaseConfig = {
-    apiKey: "AIzaSyCGSqInDORUqHEb_o69DKSU2JwtHR1Gt4A",
-    authDomain: "doctorapp-96a1f.firebaseapp.com",
-    databaseURL: "https://doctorapp-96a1f.firebaseio.com",
-    projectId: "doctorapp-96a1f",
-    storageBucket: "doctorapp-96a1f.appspot.com",
-    messagingSenderId: "120731014978",
-    appId: "1:120731014978:web:90a5fca15d607e0e"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID
   };
 /* The firebase listener, onAuthUserListener triggers a callback function every time the
 authenticated user changes. authUser is either an object or null; within the function, the
